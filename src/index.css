@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --glass-bg: rgba(17, 25, 40, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.125);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(125deg, #000428 0%, #004e92 100%);
+  color: white;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  background: rgba(17, 25, 40, 0.85);
+}
+
+.gradient-border {
+  border-radius: 1rem;
+  padding: 1px;
+  background: var(--primary-gradient);
+  overflow: hidden;
+}
+
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.drop-zone {
+  transition: all 0.3s ease;
+}
+
+.drop-zone.active {
+  transform: scale(1.02);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(17, 25, 40, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+/* Button styles */
+.action-button {
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #60a5fa;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+/* Drag & drop area */
+.drop-zone {
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.drop-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.drop-zone:hover::before, 
+.drop-zone.active::before {
+  opacity: 1;
+}
+
+.drop-zone:hover, 
+.drop-zone.active {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.drop-zone .text-blue-400 {
+  color: #60a5fa;
+  transition: color 0.3s ease;
+}
+
+.drop-zone:hover .text-blue-400,
+.drop-zone.active .text-blue-400 {
+  color: #3b82f6;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .app-container {
+    padding: 1rem;
+  }
+  
+  .glass-panel {
+    padding: 1rem !important;
+  }
+  
+  pre {
+    font-size: 0.875rem !important;
+  }
+  
+  .gradient-text {
+    font-size: 2rem !important;
+  }
+}
+
+.markdown-preview {
+  @apply prose prose-invert prose-sm max-w-none;
+}
+
+.markdown-preview h1 {
+  @apply text-2xl font-bold mb-4;
+}
+
+.markdown-preview h2 {
+  @apply text-xl font-bold mb-3;
+}
+
+.markdown-preview h3 {
+  @apply text-lg font-bold mb-2;
+}
+
+.markdown-preview p {
+  @apply mb-4;
+}
+
+.markdown-preview ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.markdown-preview ol {
+  @apply list-decimal list-inside mb-4;
+}
+
+.markdown-preview table {
+  @apply w-full border-collapse mb-4;
+}
+
+.markdown-preview th,
+.markdown-preview td {
+  @apply border border-gray-700 px-4 py-2;
+}
+
+.markdown-preview th {
+  @apply bg-gray-800;
+}
+
+.markdown-preview code {
+  @apply bg-gray-800 px-1 py-0.5 rounded;
+}
+
+.markdown-preview pre {
+  @apply bg-gray-800 p-4 rounded-lg overflow-auto;
+}
+
+.markdown-preview blockquote {
+  @apply border-l-4 border-blue-500 pl-4 italic my-4;
+}
+
+.markdown-preview hr {
+  @apply border-gray-700 my-4;
+}
+
+.markdown-preview img {
+  @apply max-w-full h-auto rounded-lg my-4;
+}
+
+.markdown-preview a {
+  @apply text-blue-400 hover:text-blue-300 underline;
+}
+
+@layer components {
+  .gradient-border {
+    @apply p-[1px] rounded-xl bg-gradient-to-r from-blue-500 to-purple-500;
+  }
+  
+  .glass-panel {
+    @apply bg-white rounded-xl;
+  }
+  
+  .action-button {
+    @apply px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200;
+  }
+}
